@@ -1,5 +1,6 @@
 :root {
   --title-color: #513883;
+  --secondary-color: #2fb86e;
   --primary-color: #34cb79;
 }
 * {
@@ -16,4 +17,7 @@ body {
 }
 a {
   text-decoration: none;
+}
+h1,h2,h3,h4,h5,h6{
+  color: var(--title-color);
 }

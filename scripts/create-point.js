@@ -1,4 +1,5 @@
 function GetData(url, select) {
+  select.innerHTML = '<option value = "">Selecione a cidade</option>';
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
@@ -24,3 +25,31 @@ function GetCitys(event) {
 }
 PopulateUFs();
 document.querySelector("select[name=uf]").addEventListener("change", GetCitys);
+
+// itens de coleta
+const itemnsToCollect = document.querySelectorAll(".items-grid li");
+for (const item of itemnsToCollect) {
+  item.addEventListener("click", HendleSelectedItem);
+}
+const collectedItems = document.querySelector("input[name=items]");
+let selectedItems = [];
+function HendleSelectedItem(event) {
+  const itemLi = event.target;
+  itemLi.classList.toggle("selected");
+
+  const itemId = itemLi.dataset.id;
+  const alereadySelected = selectedItems.findIndex((item) => {
+    const itemFound = item == itemId;
+    return itemFound;
+  });
+  if (alereadySelected >= 0) {
+    const filteredItems = selectedItems.filter((item) => {
+      const itemIsDiffrent = item != itemId;
+      return itemIsDiffrent;
+    });
+    selectedItems = filteredItems;
+  } else {
+    selectedItems.push(itemId);
+  }
+  collectedItems.value = selectedItems;
+}
