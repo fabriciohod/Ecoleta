@@ -19,8 +19,8 @@ function GetCitys(event) {
   const indexOfSelectedState = event.target.selectedIndex;
   const ufValue = event.target.value;
   const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufValue}/municipios`;
-  GetData(url, citySelect);
   stateInput.value = event.target.options[indexOfSelectedState].text;
+  GetData(url, citySelect);
   citySelect.disabled = false;
 }
 PopulateUFs();
@@ -33,6 +33,7 @@ for (const item of itemnsToCollect) {
 }
 const collectedItems = document.querySelector("input[name=items]");
 let selectedItems = [];
+
 function HendleSelectedItem(event) {
   const itemLi = event.target;
   itemLi.classList.toggle("selected");
@@ -42,6 +43,7 @@ function HendleSelectedItem(event) {
     const itemFound = item == itemId;
     return itemFound;
   });
+
   if (alereadySelected >= 0) {
     const filteredItems = selectedItems.filter((item) => {
       const itemIsDiffrent = item != itemId;
@@ -51,5 +53,6 @@ function HendleSelectedItem(event) {
   } else {
     selectedItems.push(itemId);
   }
+  
   collectedItems.value = selectedItems;
 }
